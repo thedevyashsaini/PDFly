@@ -9,6 +9,7 @@ export const usersTable = pgTable("users", {
 
 export const pdfsTable = pgTable("pdfs", {
     id: uuid("id").primaryKey().defaultRandom(),
+    name: text("name").notNull(),
     user_id: uuid("user_id").notNull().references(() => usersTable.id),
     uploaded: timestamp("uploaded").notNull().defaultNow(),
 });
@@ -22,6 +23,7 @@ export const chatsTable = pgTable("chats", {
 export const messagesTable = pgTable("messages", {
     id: uuid("id").primaryKey().defaultRandom(),
     chat_id: uuid("chat_id").notNull().references(() => chatsTable.id),
+    raw: text("raw").notNull(),
     is_generated: boolean("is_generated").default(false),
     timestamp: timestamp("timestamp").notNull().defaultNow(),
     references: jsonb("references"),

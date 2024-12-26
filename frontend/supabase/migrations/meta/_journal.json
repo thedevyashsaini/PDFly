@@ -8,6 +8,20 @@
       "when": 1735110735426,
       "tag": "0000_crazy_skin",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1735120439438,
+      "tag": "0001_rapid_dazzler",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1735210200732,
+      "tag": "0002_burly_justin_hammer",
+      "breakpoints": true
     }
   ]
 }
