@@ -2,8 +2,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends
 router = APIRouter()
 
-from src.validations import ListRequest, CreateChatRequest, RespondRequest
-from src.services.chat_service import listChats, createChat, listChatMessages, respond
+from src.validations import ListRequest, CreateChatRequest, RespondRequest, AddPDFRequest
+from src.services.chat_service import listChats, createChat, listChatMessages, respond, addPDF
 
 @router.get("/")
 async def list(body: ListRequest, service=Depends(listChats)):
@@ -46,6 +46,22 @@ async def create(body: CreateChatRequest, service=Depends(createChat)):
 
     Returns:
         Response: A response object indicating success or failure and additional information.
+    """
+    return service
+
+@router.post("/new/pdf")
+async def addNewPDF(body: AddPDFRequest, service=Depends(addPDF)):
+    """
+    Endpoint to add a new PDF.
+
+    Args:
+        body (AddPDFRequest): The request body containing:
+            - user_id (UUID): The unique identifier for the user.
+            - chat_id (UUID): The unique identifier for the chat.
+            - pdf_id (UUID): The unique identifier for the PDF to be added.
+
+    Returns:
+        The result of the addPDF service.
     """
     return service
 

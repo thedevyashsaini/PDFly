@@ -1,6 +1,6 @@
 from uuid import UUID
 from pydantic import BaseModel
-from src.validations.chat import CreateChatRequest, RespondRequest
+from src.validations.chat import CreateChatRequest, RespondRequest, AddPDFRequest
 from src.validations.user import CreateUserRequest
 
 class Response(BaseModel):
@@ -26,4 +26,4 @@ class ListRequest(BaseModel):
     """
     user_id: UUID
 
-__all__ = [Response, ListRequest, CreateChatRequest, RespondRequest, CreateUserRequest]
+__all__ = [Response, ListRequest, CreateChatRequest, RespondRequest, CreateUserRequest, AddPDFRequest]

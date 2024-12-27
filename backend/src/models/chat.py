@@ -105,3 +105,15 @@ class Chat(BaseModel):
         """
         response = supabase.from_("chats").delete().eq("id", chat_id).execute()
         return response.status_code == 204
+    
+    def update(self) -> bool:
+        """
+        Updates the chat record in the database with the current list of PDFs.
+
+        Returns:
+            bool: True if the update was successful, False otherwise.
+        """
+        response = supabase.from_("chats").update({
+            "pdfs": [str(pdf_id) for pdf_id in self.pdfs],
+        }).eq("id", self.id).execute()
+        return len(response.data) > 0 

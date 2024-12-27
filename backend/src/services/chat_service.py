@@ -1,7 +1,7 @@
 from typing import List
 from uuid import UUID
 from src.models import Chat, User, PDF, Message
-from src.validations import Response, ListRequest, CreateChatRequest, RespondRequest
+from src.validations import Response, ListRequest, CreateChatRequest, RespondRequest, AddPDFRequest
 from src.utils import responder
 
 def listChats(body: ListRequest) -> Response:
@@ -131,3 +131,46 @@ def respond(body: RespondRequest) -> Response:
     
     except Exception as e:
         return Response(success=False, message=f"Internal Server Error: {str(e)}")
+    
+    
+def addPDF(body: AddPDFRequest) -> Response: 
+    """
+    Adds a PDF to a chat for a given user.
+    
+    Args:
+        body (AddPDFRequest): The request body containing user_id, chat_id, and pdf_id.
+        
+    Returns:
+        Response: A response object indicating success or failure of the operation.
+    """
+    try:
+        user: User = User.get_by_id(body.user_id)
+        
+        if not user:
+            raise Exception("User not found")
+        
+        chat: Chat = Chat.get_by_id(body.chat_id)
+        
+        if not chat or chat.user_id != user.id:
+            raise Exception("Chat not found")
+        
+        if body.pdf_id in chat.pdfs:
+            raise Exception("PDF already in chat")
+        
+        pdf: PDF = PDF.get_by_id(body.pdf_id)
+        
+        if not pdf or pdf.user_id != user.id:
+            raise Exception("PDF not found")
+        
+        chat.pdfs.append(body.pdf_id)
+        
+        resp = chat.update()
+        
+        if not resp:
+            raise Exception("Failed to add PDF to chat")
+        
+        return Response(success=True, message="PDF added to chat", chat=chat)
+    
+    except Exception as e:
+        return Response(success=False, message=f"Internal Server Error: {str(e)}")
+        

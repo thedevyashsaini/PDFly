@@ -25,3 +25,16 @@ class RespondRequest(BaseModel):
     user_id: UUID
     chat_id: UUID
     message: str
+    
+class AddPDFRequest(BaseModel):
+    """
+    AddPDFRequest is a data model for adding a PDF to a chat.
+
+    Attributes:
+        user_id (UUID): The unique identifier of the user.
+        chat_id (UUID): The unique identifier of the chat.
+        pdf_id (UUID): The unique identifier of the PDF.
+    """
+    user_id: UUID
+    chat_id: UUID
+    pdf_id: UUID
