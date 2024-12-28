@@ -18,6 +18,6 @@ def summarize(loader: PyPDFLoader) -> str:
     
     chain = load_summarize_chain(llm, chain_type="map_reduce")
 
-    result = chain.run(docs)
+    result = chain.invoke(docs)
 
-    return result
+    return result['output_text']

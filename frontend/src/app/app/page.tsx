@@ -22,6 +22,8 @@ const app = async () => {
     }
   );
 
+  console.log(pdfResponse);
+
   if (!pdfResponse.ok) {
     throw new Error("Failed to fetch PDFs 11");
   }
