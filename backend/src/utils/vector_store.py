@@ -1,5 +1,4 @@
 from pinecone import Pinecone, ServerlessSpec
-from typing import List, Dict, Any
 from src.core.config import settings
 import time
 from langchain_pinecone import PineconeVectorStore
