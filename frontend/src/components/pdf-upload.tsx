@@ -13,13 +13,11 @@ export function PDFUpload({
   chat_id: string | boolean;
   onUpload: (pdf: SelectPdf[]) => void;
 }) {
-  const [_, setFiles] = useState<File[]>([]);
 
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Uploading...");
 
   const handleFileUpload = async (files: File[]) => {
-    setFiles(files);
     setLoading(true);
 
     const formData = new FormData();

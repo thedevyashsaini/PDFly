@@ -12,7 +12,7 @@ interface SidebarDemoProps {
 }
 
 export function ChatSidebar({ children, chats, pdfs, chat_name }: SidebarDemoProps) {
-  const [chatPDFs, _] = useState<SelectPdf[]>(pdfs);
+  const chatPDFs = pdfs;
   
   const links = chats.map((chat) => ({
     label: chat.name,
