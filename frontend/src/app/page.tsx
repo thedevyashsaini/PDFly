@@ -13,7 +13,7 @@ export default async function Home() {
           PDFly <br />{" "}
           <span className="text-2xl md:text-4xl flex w-full justify-center my-4">
             Talk to your PDFs, <br />
-            they'll show you what's inside!
+            they&apos;ll show you what&apos;s inside!
           </span>
         </h1>
         <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">

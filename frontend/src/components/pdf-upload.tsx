@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Subjects } from "@/subjects";
 import { redirect } from "next/navigation";
-import { set } from "zod";
 import { SelectPdf } from "@/db/schema";
 
 export function PDFUpload({
@@ -14,7 +13,7 @@ export function PDFUpload({
   chat_id: string | boolean;
   onUpload: (pdf: SelectPdf[]) => void;
 }) {
-  const [files, setFiles] = useState<File[]>([]);
+  const [_, setFiles] = useState<File[]>([]);
 
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Uploading...");

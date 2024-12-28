@@ -1,13 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "./ui/sidebar";
-import {
-  IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
-} from "@tabler/icons-react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { SelectChat, SelectPdf } from "@/db/schema";
 
@@ -19,7 +12,7 @@ interface SidebarDemoProps {
 }
 
 export function ChatSidebar({ children, chats, pdfs, chat_name }: SidebarDemoProps) {
-  const [chatPDFs, setChatPDFs] = useState<SelectPdf[]>(pdfs);
+  const [chatPDFs, _] = useState<SelectPdf[]>(pdfs);
   
   const links = chats.map((chat) => ({
     label: chat.name,

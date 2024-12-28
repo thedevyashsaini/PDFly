@@ -5,14 +5,15 @@ import { login } from "../app/actions";
 import { redirect } from "next/navigation";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
 import { ChevronRight } from "lucide-react";
-import { subjects } from "@/subjects";
 import { cn } from "@/lib/utils";
 
 interface InteractiveDivProps {
   subject:
     | {
         type: "user";
-        properties: {};
+        properties: {
+          [key: string]: any;
+        };
       }
     | false;
 }

@@ -10,7 +10,6 @@ import { ChatInput } from "./ui/chat/chat-input";
 import { SelectMessage, SelectPdf } from "@/db/schema";
 import { Subjects } from "@/subjects";
 import { useEffect, useRef, useState } from "react";
-import { PDFUpload } from "./pdf-upload";
 import ChatPDFUpload from "./chat-upload-pdf";
 
 const ChatUI = ({
@@ -128,8 +127,8 @@ const ChatUI = ({
             variant={"received"}
             className="bg-primary text-white text-sm"
           >
-            Hey {subject.properties.name}! I'm your PDFly assistant. I'll help
-            you talk to your PDFs, and see what's inside ;)
+            Hey {subject.properties.name}! I`&apos;m your PDFly assistant. I`&apos;ll help
+            you talk to your PDFs, and see what`&apos;s inside ;)
             <br />
             <br />
             You can ask me querries related to these PDFs: <br />

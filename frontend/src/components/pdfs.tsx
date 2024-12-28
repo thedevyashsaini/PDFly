@@ -14,7 +14,7 @@ export function PDFS({ pdfs }: { pdfs: SelectPdf[] }) {
   return pdfs.length > 0 ? (
     <Carousel className="w-full max-w-[80%]">
       <CarouselContent className="-ml-1">
-        {pdfs.map((pdf, index) => (
+        {pdfs.map((pdf) => (
           <CarouselItem
             key={pdf.id}
             className="pl-1 basis-1/1 md:basis-1/2 lg:basis-1/3"
@@ -34,7 +34,7 @@ export function PDFS({ pdfs }: { pdfs: SelectPdf[] }) {
     </Carousel>
   ) : (
     <>
-    <span className="place-self-start text-[#707070]">Nothing's here...</span>
+    <span className="place-self-start text-[#707070]">Nothing&apos;s here...</span>
     </>
   );
 }
