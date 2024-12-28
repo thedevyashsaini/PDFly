@@ -21,7 +21,7 @@ async def CreateUser(body: CreateUserRequest, service=Depends(CreateUser)):
     """
     return service
 
-@router.get("/")
+@router.post("/")
 async def getUser(body: ListRequest, service=Depends(GetUser)):
     """
     Retrieves a user by their unique identifier.

@@ -12,6 +12,7 @@ class CreateChatRequest(BaseModel):
     """
     user_id: UUID
     pdfs: List[UUID]
+    name: str
 
 class RespondRequest(BaseModel):
     """

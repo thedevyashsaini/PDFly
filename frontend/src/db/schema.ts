@@ -16,6 +16,7 @@ export const pdfsTable = pgTable("pdfs", {
 
 export const chatsTable = pgTable("chats", {
     id: uuid("id").primaryKey().defaultRandom(),
+    name: text("name").notNull(),
     user_id: uuid("user_id").notNull().references(() => usersTable.id),
     pdfs: jsonb("pdfs").notNull(),
 });

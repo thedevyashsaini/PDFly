@@ -6,7 +6,7 @@ router = APIRouter()
 from src.validations import ListRequest
 from src.services.pdf_service import listPDFs, addPDF, listChatPDFs
 
-@router.get("/")
+@router.post("/")
 async def list(body: ListRequest, service=Depends(listPDFs)):
     """
     Lists all PDFs associated with a user.
@@ -34,7 +34,7 @@ async def add(user_id: Annotated[str, Form()], pdf: Annotated[UploadFile, File()
     """
     return service
 
-@router.get("/{pdf_id}/chats")
+@router.post("/{pdf_id}/chats")
 async def list_chats(pdf_id: UUID, body: ListRequest, service=Depends(listChatPDFs)):
     """
     Lists all chats associated with a specific PDF for a user.

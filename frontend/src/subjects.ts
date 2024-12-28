@@ -18,3 +18,22 @@ export const subjects = createSubjects({
     pfp: z.string(),
   }),
 })
+
+export type Subjects = {
+  type: "user";
+  properties: {
+      id: string;
+      name: string;
+      email: string;
+      pfp: string;
+      providers: {
+          provider: string;
+          tokenset: {
+              access: string;
+              refresh: string;
+              expiry: number;
+              raw: Record<string, any>;
+          };
+      }[];
+  };
+}

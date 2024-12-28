@@ -10,6 +10,7 @@ class Chat(BaseModel):
     id: UUID
     user_id: UUID
     pdfs: List[UUID]
+    name: str
 
     @staticmethod
     def get_by_id(chat_id: UUID) -> Optional["Chat"]:
@@ -69,7 +70,7 @@ class Chat(BaseModel):
         return chats
 
     @staticmethod
-    def add(user_id: UUID, pdf_ids: List[UUID]) -> "Chat":
+    def add(user_id: UUID, name: str, pdf_ids: List[UUID]) -> "Chat":
         """
         Adds a new chat to the database.
 
@@ -86,6 +87,7 @@ class Chat(BaseModel):
         chat_data = {
             "user_id": str(user_id),
             "pdfs": [str(pdf_id) for pdf_id in pdf_ids],
+            "name": name,
         }
         response = supabase.from_("chats").insert(chat_data).execute()
         if len(response.data) > 0:

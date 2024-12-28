@@ -3,9 +3,9 @@ from fastapi import APIRouter, Depends
 router = APIRouter()
 
 from src.validations import ListRequest, CreateChatRequest, RespondRequest, AddPDFRequest
-from src.services.chat_service import listChats, createChat, listChatMessages, respond, addPDF
+from src.services.chat_service import listChats, createChat, listChatMessages, respond, addPDF, getChat
 
-@router.get("/")
+@router.post("/")
 async def list(body: ListRequest, service=Depends(listChats)):
     """
     Lists all chats associated with a user.
@@ -19,7 +19,11 @@ async def list(body: ListRequest, service=Depends(listChats)):
     """
     return service
 
-@router.get("/messages/{chat_id}")
+@router.post("/get/{chat_id}")
+async def messages(chat_id: UUID, body: ListRequest, service=Depends(getChat)):
+    return service
+
+@router.post("/messages/{chat_id}")
 async def messages(chat_id: UUID, body: ListRequest, service=Depends(listChatMessages)):
     """
     Lists all messages associated with a specific chat for a user.
@@ -43,6 +47,7 @@ async def create(body: CreateChatRequest, service=Depends(createChat)):
         body (CreateChatRequest): The request body containing chat details.
             - user_id (UUID): The unique identifier for the user.
             - pdfs (List[UUID]): List of PDF document IDs associated with the chat.
+            - name (str): Name of the chat
 
     Returns:
         Response: A response object indicating success or failure and additional information.

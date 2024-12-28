@@ -64,6 +64,7 @@ def createChat(body: CreateChatRequest) -> Response:
         body (CreateChatRequest): The request body containing chat details.
             - user_id (UUID): The unique identifier for the user.
             - pdfs (List[UUID]): List of PDF document IDs associated with the chat.
+            - name (str): Name of the chat
 
     Returns:
         Response: A response object indicating success or failure and additional information.
@@ -79,7 +80,7 @@ def createChat(body: CreateChatRequest) -> Response:
             if not pdf:
                 raise Exception(f"PDF not found - {pdf_id}")
             
-        new_chat = Chat.add(body.user_id, body.pdfs)
+        new_chat = Chat.add(body.user_id, body.name, body.pdfs)
         return Response(success=True, message="Chat created", chat=new_chat)
     except Exception as e:
         return Response(success=False, message=f"Internal Server Error: {str(e)}")
@@ -174,3 +175,26 @@ def addPDF(body: AddPDFRequest) -> Response:
     except Exception as e:
         return Response(success=False, message=f"Internal Server Error: {str(e)}")
         
+        
+def getChat(chat_id: UUID, body: ListRequest) -> Response:
+    try:
+        user: User = User.get_by_id(body.user_id)
+        
+        if not user:
+            raise Exception("User not found")
+        
+        chat: Chat = Chat.get_by_id(chat_id)
+        
+        if not chat or chat.user_id != user.id:
+            raise Exception("Chat not found")
+        
+        pdfs: List[PDF] = []
+        for pdf in chat.pdfs:
+            pdfs.append(PDF.get_by_id(pdf))
+            
+        chat.pdfs = pdfs
+            
+        return Response(success=True, message="Chat retrieved", chat=chat)
+        
+    except Exception as e:
+        return Response(success=False, message=f"Internal Server Error: {str(e)}")
