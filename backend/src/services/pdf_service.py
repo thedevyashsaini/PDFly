@@ -86,21 +86,33 @@ async def addPDF(user_id: Annotated[str, Form()], pdf: Annotated[UploadFile, Fil
         
         new_pdf = PDF.add(user_id, pdf.filename.replace(".pdf", ""))
         
+        print("PDF created -", new_pdf)
+        
         if new_pdf.id:
             
             pdf_data = pdf.file.read()
             
+            print("PDF data read")
+            
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf_file:
                 temp_pdf_file.write(pdf_data)
                 temp_pdf_path = temp_pdf_file.name
+                
+            print("PDF saved to temp file - " + temp_pdf_path)
             
             loader = PyPDFLoader(temp_pdf_path)
+            
+            print("PDF loader created")
             
             pdf_text = ""
             async for page in loader.alazy_load():
                 pdf_text += page.page_content
                 
+            print("PDF text read")
+                
             pdf_chunks: List[str] = chunker.split(pdf_text)
+            
+            print("PDF text split into chunks")
             
             documents: List[Document] = []
             ids: List[str] = []
@@ -111,9 +123,12 @@ async def addPDF(user_id: Annotated[str, Form()], pdf: Annotated[UploadFile, Fil
                     metadata={"pdf": str(new_pdf.id)}
                 ))
                 
+            print("Documents created from chunks")
+                
             for i in range(len(pdf_chunks)):
                 ids.append(str(new_pdf.id) + "." + str(i))
                 
+            print("IDs created for documents")
             
             # summary = summarize(loader)
             
@@ -125,6 +140,8 @@ async def addPDF(user_id: Annotated[str, Form()], pdf: Annotated[UploadFile, Fil
             # ids.append(str(new_pdf.id) + ".summary")
             
             store.vector_store.add_documents(documents=documents, ids=ids)
+            
+            print("Documents stored in vector store")
             
             return Response(success=True, message="PDF added", pdf=new_pdf)
         
