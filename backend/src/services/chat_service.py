@@ -192,9 +192,10 @@ def getChat(chat_id: UUID, body: ListRequest) -> Response:
         for pdf in chat.pdfs:
             pdfs.append(PDF.get_by_id(pdf))
             
-        chat.pdfs = pdfs
+        chatWithPDFs = chat.model_dump()
+        chatWithPDFs["pdfs"] = pdfs
             
-        return Response(success=True, message="Chat retrieved", chat=chat)
+        return Response(success=True, message="Chat retrieved", chat=chatWithPDFs)
         
     except Exception as e:
         return Response(success=False, message=f"Internal Server Error: {str(e)}")

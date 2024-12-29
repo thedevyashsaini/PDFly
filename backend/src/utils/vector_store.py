@@ -37,7 +37,7 @@ class Store:
                 
         self.index = self._pinecone.Index(index_name)
         
-        self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+        self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
         self.vector_store = PineconeVectorStore(index=self.index, embedding=self.embeddings)
 
