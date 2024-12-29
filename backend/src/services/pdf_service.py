@@ -115,14 +115,14 @@ async def addPDF(user_id: Annotated[str, Form()], pdf: Annotated[UploadFile, Fil
                 ids.append(str(new_pdf.id) + "." + str(i))
                 
             
-            summary = summarize(loader)
+            # summary = summarize(loader)
             
-            documents.append(Document(
-                page_content=summary,
-                metadata={"pdf": str(new_pdf.id)}
-            ))
+            # documents.append(Document(
+            #     page_content=summary,
+            #     metadata={"pdf": str(new_pdf.id)}
+            # ))
             
-            ids.append(str(new_pdf.id) + ".summary")
+            # ids.append(str(new_pdf.id) + ".summary")
             
             store.vector_store.add_documents(documents=documents, ids=ids)
             
