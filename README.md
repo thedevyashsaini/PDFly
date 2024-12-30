@@ -31,6 +31,10 @@ PDFly is a powerful tool that allows you to interact with your PDF documents thr
 - Upload and manage PDF documents
 - Get summaries and insights from your PDFs
 
+P.S.: Oh, and about that API endpoint for uploading PDFs—yeah, it’s not going to work. Why? Because the embedding model needs infrastructure fancier than what free hosting services offer, and guess what? They all said nope. I could have hosted it on my Azure VM, but let’s be honest, I’m not about to burn my precious credits on a pre-interview assignment.
+
+But hey, if you’re feeling adventurous (or just really determined), you can run it locally. Everything you need to get started is written in this README. Knock yourself out!
+
 ## Getting Started
 
 ### Prerequisites
